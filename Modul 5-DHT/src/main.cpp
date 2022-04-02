@@ -8,15 +8,25 @@
 
 byte temperature = 0;
 byte humidity = 0;
-
 SimpleDHT11 dht11(D5); 
 
-void KelembabanSuhu()
-{
+void setup() {
+  Serial.begin(115200);
+  pinMode(RED_LED,OUTPUT);
+  pinMode(GREEN_LED,OUTPUT);
+  pinMode(BLUE_LED,OUTPUT);
+  Serial.println("Simple DHT and Convert");
+  delay(1000);
+}
+
+void loop() {
+  KelembabanSuhu();
+}
+
+void KelembabanSuhu() {
   int err = SimpleDHTErrSuccess;
 
-  if ((err = dht11.read(&temperature, &humidity, NULL)) != SimpleDHTErrSuccess)
-  {
+  if ((err = dht11.read(&temperature, &humidity, NULL)) != SimpleDHTErrSuccess) {
     Serial.print("Pembacaan DHT11 gagal, err=");
     Serial.println(err);
     delay(1000);
@@ -50,21 +60,5 @@ void KelembabanSuhu()
     delay(1000);
   }
   Serial.println("================================================");
-
   delay(1500);
-}
-
-void setup()
-{
-  Serial.begin(115200);
-  pinMode(RED_LED,OUTPUT);
-  pinMode(GREEN_LED,OUTPUT);
-  pinMode(BLUE_LED,OUTPUT);
-  Serial.println("Simple DHT and Convert");
-  delay(1000);
-}
-
-void loop()
-{
-  KelembabanSuhu();
 }
